@@ -7,12 +7,18 @@
 
 int main() {
 	sf::RenderWindow window(sf::VideoMode(800, 600), "Drawing");
+    std::vector<sf::RectangleShape> rectangles;
+    int currx = 100;
+    for (int i = 0; i < 3; i++) {
+        sf::RectangleShape rectangle(sf::Vector2f(100, 200));
+        rectangle.setFillColor(sf::Color::White);                 
+        rectangle.setOutlineColor(sf::Color::Green);                
+        rectangle.setOutlineThickness(2.f);
+        rectangle.setPosition(currx, 100);
+        currx += 150;
+        rectangles.push_back(rectangle);
 
-	sf::RectangleShape rectangle(sf::Vector2f(200.f, 100.f)); // Width: 200, Height: 100
-	rectangle.setFillColor(sf::Color::White);                 // Fill color: Green
-	rectangle.setOutlineColor(sf::Color::Green);                // Outline color: Red
-	rectangle.setOutlineThickness(2.f);                       // Outline thickness: 5
-	rectangle.setPosition(100.f, 100.f);
+    }
 
 
     while (window.isOpen())
@@ -25,7 +31,9 @@ int main() {
         }
 
         window.clear();
-        window.draw(rectangle);
+        for (auto& rectangle : rectangles) {
+            window.draw(rectangle);
+        }
         window.display();
     }
 }
